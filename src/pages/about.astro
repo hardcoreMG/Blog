@@ -1,0 +1,29 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const title = "关于我";
+const description = "关于我";
+const permalink = `${Astro.site?.href ?? ""}about`;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  permalink={permalink}
+  current="about"
+>
+  <div class="container">
+    <h1>{title}</h1>
+    <figure
+      class="float-none lg:float-right m-[0_auto_2em] lg:m-[-3em_-7em_2em_2em] max-w-40 xs:max-w-75"
+    >
+      <img
+        class="rounded-xl mb-[1.5em]"
+        src="/assets/about-illustration.webp"
+        alt="Illustration of a notebook"
+        width="330"
+      />
+    </figure>
+    <p>这是我的个人介绍～</p>
+  </div>
+</BaseLayout>
