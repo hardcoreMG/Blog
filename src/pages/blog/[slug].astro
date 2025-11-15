@@ -18,12 +18,7 @@ const permalink = `${Astro.site?.href ?? ""}blog/${slug}`;
 const { Content } = await render(post);
 ---
 
-<BaseLayout
-  title={title}
-  description={description}
-  permalink={permalink}
-  current="blog"
->
+<BaseLayout title={title} description={description} permalink={permalink}>
   <header class="text-center">
     <h1 class="mb-[0.7em]">{title}</h1>
     <p
