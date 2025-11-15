@@ -3,15 +3,13 @@ import {
   MobileNavHeader,
   MobileNavMenu,
   MobileNavToggle,
-  Navbar,
-  NavbarLogo,
-  NavBody,
-  NavItems,
-} from "@/components/ui/resizable-navbar";
+} from "@/components/navbar/MobileNavbar";
+import { Navbar, NavBody, NavItems } from "@/components/navbar/Navbar";
+import { NavbarLogo } from "@/components/navbar/NavbarLogo";
 
 import { ThemeProvider } from "@/hooks/useTheme";
 import { useState } from "react";
-import ThemeToggleButton from "./ThemeToggleButton";
+import ThemeToggleButton from "./navbar/ThemeToggleButton";
 
 interface HeaderProps {
   current?: string;
@@ -45,7 +43,7 @@ export default function Header({ current = "" }: HeaderProps) {
         {/* Desktop Navigation */}
         <NavBody>
           <NavbarLogo />
-          <NavItems items={navItems} />
+          <NavItems items={navItems} current={current} />
           <div className="flex items-center gap-4 ml-2">
             <ThemeToggleButton />
           </div>

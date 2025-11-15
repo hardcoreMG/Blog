@@ -1,4 +1,4 @@
-import { NavbarButton } from "@/components/ui/NavbarButton";
+import { NavbarButton } from "@/components/navbar/NavbarButton";
 import { useTheme } from "@/hooks/useTheme";
 
 const icons = [
