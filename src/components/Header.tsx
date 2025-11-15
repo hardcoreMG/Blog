@@ -7,7 +7,6 @@ import {
 import { Navbar, NavBody, NavItems } from "@/components/navbar/Navbar";
 import { NavbarLogo } from "@/components/navbar/NavbarLogo";
 
-import { ThemeProvider } from "@/hooks/useTheme";
 import { useState } from "react";
 import ThemeToggleButton from "./navbar/ThemeToggleButton";
 
@@ -38,47 +37,45 @@ export default function Header({ current = "" }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <ThemeProvider>
-      <Navbar>
-        {/* Desktop Navigation */}
-        <NavBody>
+    <Navbar>
+      {/* Desktop Navigation */}
+      <NavBody>
+        <NavbarLogo />
+        <NavItems items={navItems} current={current} />
+        <div className="flex items-center gap-4 ml-2">
+          <ThemeToggleButton />
+        </div>
+      </NavBody>
+
+      {/* Mobile Navigation */}
+      <MobileNav>
+        <MobileNavHeader>
           <NavbarLogo />
-          <NavItems items={navItems} current={current} />
-          <div className="flex items-center gap-4 ml-2">
+          <div className="flex items-center gap-4">
             <ThemeToggleButton />
+            <MobileNavToggle
+              isOpen={isMobileMenuOpen}
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            />
           </div>
-        </NavBody>
+        </MobileNavHeader>
 
-        {/* Mobile Navigation */}
-        <MobileNav>
-          <MobileNavHeader>
-            <NavbarLogo />
-            <div className="flex items-center gap-4">
-              <ThemeToggleButton />
-              <MobileNavToggle
-                isOpen={isMobileMenuOpen}
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              />
-            </div>
-          </MobileNavHeader>
-
-          <MobileNavMenu
-            isOpen={isMobileMenuOpen}
-            onClose={() => setIsMobileMenuOpen(false)}
-          >
-            {navItems.map((item, idx) => (
-              <a
-                key={`mobile-link-${idx}`}
-                href={item.link}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="relative text-neutral-600 dark:text-neutral-300 text-lg"
-              >
-                <span className="block">{item.name}</span>
-              </a>
-            ))}
-          </MobileNavMenu>
-        </MobileNav>
-      </Navbar>
-    </ThemeProvider>
+        <MobileNavMenu
+          isOpen={isMobileMenuOpen}
+          onClose={() => setIsMobileMenuOpen(false)}
+        >
+          {navItems.map((item, idx) => (
+            <a
+              key={`mobile-link-${idx}`}
+              href={item.link}
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="relative text-neutral-600 dark:text-neutral-300 text-lg"
+            >
+              <span className="block">{item.name}</span>
+            </a>
+          ))}
+        </MobileNavMenu>
+      </MobileNav>
+    </Navbar>
   );
 }

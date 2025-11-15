@@ -1,5 +1,6 @@
 import { NavbarButton } from "@/components/navbar/NavbarButton";
 import { useTheme } from "@/hooks/useTheme";
+import { useEffect } from "react";
 
 const icons = [
   <svg
@@ -30,6 +31,14 @@ const icons = [
 
 export default function ThemeToggleButton() {
   const { theme, setTheme } = useTheme();
+
+  useEffect(() => {
+    const isDark =
+      theme === "dark" ||
+      (theme === "system" &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches);
+    document.documentElement.classList[isDark ? "add" : "remove"]("dark");
+  }, [theme]);
 
   const toggleTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";
