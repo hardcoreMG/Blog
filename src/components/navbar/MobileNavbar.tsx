@@ -2,7 +2,6 @@ import { cn } from "@/lib/utils";
 import { IconMenu2, IconX } from "@tabler/icons-react";
 import { AnimatePresence, motion } from "motion/react";
 
-import { useTheme } from "@/hooks/useTheme";
 import * as React from "react";
 import { NavbarButton } from "./NavbarButton";
 
@@ -102,13 +101,8 @@ export const MobileNavToggle = ({
   isOpen: boolean;
   onClick: () => void;
 }) => {
-  const { theme } = useTheme();
   return (
-    <NavbarButton
-      variant={theme === "light" ? "primary" : "dark"}
-      className="rounded-full"
-      onClick={onClick}
-    >
+    <NavbarButton variant="primary" className="rounded-full" onClick={onClick}>
       {isOpen ? (
         <IconX className="text-black dark:text-white" />
       ) : (
