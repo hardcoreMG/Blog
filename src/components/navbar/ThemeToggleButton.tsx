@@ -59,7 +59,7 @@ export default function ThemeToggleButton() {
 
   return (
     <NavbarButton
-      variant={theme === "light" ? "primary" : "dark"}
+      variant="primary"
       className="rounded-full"
       onClick={toggleTheme}
       title={`切换到${theme === "light" ? "暗色" : "亮色"}主题`}
