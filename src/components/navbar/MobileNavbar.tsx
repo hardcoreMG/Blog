@@ -104,9 +104,9 @@ export const MobileNavToggle = ({
   return (
     <NavbarButton variant="primary" className="rounded-full" onClick={onClick}>
       {isOpen ? (
-        <IconX className="text-black dark:text-white" />
+        <IconX className="text-black dark:text-white size-5" />
       ) : (
-        <IconMenu2 className="text-black dark:text-white" />
+        <IconMenu2 className="text-black dark:text-white size-5" />
       )}
     </NavbarButton>
   );
