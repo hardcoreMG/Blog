@@ -18,7 +18,9 @@ const { title, description, permalink, current } = Astro.props;
   </head>
   <body>
     <div class="flex flex-col min-h-screen min-w-80">
-      <Header current={current} client:only="react" />
+      <Header current={current} client:only="react">
+        <div class="h-18" slot="fallback"></div>
+      </Header>
 
       <main
         class="flex flex-col flex-1 relative mx-auto max-w-350 px-[2em] pt-4 box-border w-full"
