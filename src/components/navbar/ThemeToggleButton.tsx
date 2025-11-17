@@ -1,6 +1,6 @@
 import { NavbarButton } from "@/components/navbar/NavbarButton";
+import { useDarkMode } from "@/hooks/useDarkMode";
 import { useEffect } from "react";
-import { useDarkMode } from "usehooks-ts";
 
 const icons = [
   <svg
