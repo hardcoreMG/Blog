@@ -1,7 +1,6 @@
 import { NavbarButton } from "@/components/navbar/NavbarButton";
-import { useEffect, useState } from "react";
-
-type Theme = "light" | "dark" | "system";
+import { useEffect } from "react";
+import { useDarkMode } from "usehooks-ts";
 
 const icons = [
   <svg
@@ -31,41 +30,29 @@ const icons = [
 ];
 
 export default function ThemeToggleButton() {
-  const [theme, setTheme] = useState<Theme>("light");
+  const { isDarkMode, toggle } = useDarkMode({
+    initializeWithValue: false,
+    localStorageKey: "dark-mode",
+  });
 
   useEffect(() => {
-    const theme = localStorage.getItem("theme") as Theme;
-    if (theme) {
-      setTheme(theme);
+    const root = document.documentElement;
+    if (isDarkMode) {
+      root.classList.add("dark");
     } else {
-      const isDarkMode = document.documentElement.classList.contains("dark");
-      setTheme(isDarkMode ? "dark" : "light");
+      root.classList.remove("dark");
     }
-  }, []);
-
-  useEffect(() => {
-    const isDark =
-      theme === "dark" ||
-      (theme === "system" &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches);
-    document.documentElement.classList[isDark ? "add" : "remove"]("dark");
-  }, [theme]);
-
-  const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
-    setTheme(newTheme);
-    localStorage.setItem("theme", newTheme);
-  };
+  }, [isDarkMode]);
 
   return (
     <NavbarButton
       variant="primary"
       className="rounded-full"
-      onClick={toggleTheme}
-      title={`切换到${theme === "light" ? "暗色" : "亮色"}主题`}
-      aria-label={`切换到${theme === "light" ? "暗色" : "亮色"}主题`}
+      onClick={toggle}
+      title={`切换到${isDarkMode ? "暗色" : "亮色"}主题`}
+      aria-label={`切换到${isDarkMode ? "暗色" : "亮色"}主题`}
     >
-      {theme === "light" ? icons[0] : icons[1]}
+      {isDarkMode ? icons[1] : icons[0]}
     </NavbarButton>
   );
 }

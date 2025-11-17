@@ -39,13 +39,13 @@ const socialUrl = Astro.site?.href ?? "" + "assets/social.png";
 
 <ClientRouter />
 
-<!-- 该代码块采用内联方式以避免页面出现闪烁（FOUC） -->
+<!-- 避免页面出现闪烁（FOUC） -->
 <script is:inline>
   const root = document.documentElement;
-  const theme = localStorage.getItem("theme");
+  const darkMode = localStorage.getItem("dark-mode");
   if (
-    theme === "dark" ||
-    (!theme && window.matchMedia("(prefers-color-scheme: dark)").matches)
+    darkMode === "true" ||
+    (!darkMode && window.matchMedia("(prefers-color-scheme: dark)").matches)
   ) {
     root.classList.add("dark");
   } else {
