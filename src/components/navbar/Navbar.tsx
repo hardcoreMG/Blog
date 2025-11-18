@@ -75,7 +75,7 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
       }}
       className={cn(
         "z-60 mx-auto mt-2 hidden w-full max-w-7xl min-w-3xl flex-row items-center justify-between self-start",
-        "bg-white/50 px-4 py-2 md:flex dark:bg-background/60 backdrop-blur-sm",
+        "px-4 py-2 md:flex bg-transparent backdrop-blur-sm",
         className
       )}
     >
