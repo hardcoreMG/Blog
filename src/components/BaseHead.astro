@@ -41,14 +41,26 @@ const socialUrl = Astro.site?.href ?? "" + "assets/social.png";
 
 <!-- 避免页面出现闪烁（FOUC） -->
 <script is:inline>
-  const root = document.documentElement;
-  const darkMode = localStorage.getItem("dark-mode");
-  if (
-    darkMode === "true" ||
-    (!darkMode && window.matchMedia("(prefers-color-scheme: dark)").matches)
-  ) {
-    root.classList.add("dark");
-  } else {
-    root.classList.remove("dark");
+  function setTheme() {
+    const root = document.documentElement;
+    const darkMode = localStorage.getItem("dark-mode");
+    if (
+      darkMode === "true" ||
+      (!darkMode && window.matchMedia("(prefers-color-scheme: dark)").matches)
+    ) {
+      root.classList.add("dark");
+    } else {
+      root.classList.remove("dark");
+    }
   }
+
+  document.addEventListener("astro:page-load", () => {
+    setTheme();
+  });
+
+  document.addEventListener("astro:after-swap", () => {
+    setTheme();
+  });
+
+  setTheme();
 </script>
