@@ -1,0 +1,13 @@
+---
+export interface Props {
+  position: "top-left" | "top-right" | "bottom-left" | "bottom-right";
+}
+const { position } = Astro.props;
+---
+
+<div
+  class={`absolute ${position === "top-left" ? "-top-6 -left-6" : position === "top-right" ? "-top-6 -right-6" : position === "bottom-left" ? "-bottom-6 -left-6" : "-bottom-6 -right-6"}
+  bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-3 rounded-xl shadow-xl animate-bounce delay-1000 duration-4000 border border-gray-100 dark:border-gray-700 hidden md:block`}
+>
+  <slot />
+</div>
