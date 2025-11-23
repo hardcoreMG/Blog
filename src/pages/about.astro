@@ -1,9 +1,63 @@
 ---
+import {
+  Bot,
+  Code,
+  Home,
+  Network,
+  Server,
+  Settings2,
+  Terminal,
+} from "lucide-react";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const title = "关于我";
-const description = "关于我";
+const description = "硬核马哥的个人介绍 - 技术探索者";
 const permalink = `${Astro.site?.href ?? ""}about`;
+
+const skills = [
+  {
+    title: "Web 开发",
+    icon: Code,
+    content:
+      "对主流前端框架（React, Vue.js）及现代 CSS 方案（Tailwind CSS）有深入研究。热衷于使用 Next.js 构建全栈应用，探索 RSC 和 Edge Functions 等前沿特性。关注前端性能优化与工程化（Webpack, Rollup, ESLint, Astro）。",
+    tags: ["React", "Vue.js", "Next.js", "Tailwind", "Astro", "Webpack"],
+  },
+  {
+    title: "后端 & 云计算",
+    icon: Server,
+    content:
+      "熟悉 Node.js 生态，熟练使用 Drizzle 和 Prisma 等 ORM。对 Cloudflare (Workers, Pages, KV) 和 Vercel 等 Serverless 平台有深入实践。掌握 Docker 等容器化技术，探索云端应用的部署与管理。",
+    tags: ["Node.js", "Drizzle", "Cloudflare", "Docker", "Vercel"],
+  },
+  {
+    title: "自托管 (Homelab)",
+    icon: Home,
+    content:
+      "热衷于搭建和维护个人服务器，折腾各类自托管服务。从媒体中心 Jellyfin 到家庭自动化 Home Assistant，再到软路由 OpenWrt，享受掌控数据与服务的乐趣。",
+    tags: ["Homelab", "Jellyfin", "Home Assistant", "OpenWrt"],
+  },
+  {
+    title: "AI & LLM",
+    icon: Bot,
+    content:
+      "积极探索大语言模型的前沿技术，包括 RAG 应用、模型评估及 AI SDK 的使用。关注 DeepSeek、Gemini 等国内外模型的发展与应用落地。",
+    tags: ["LLMs", "RAG", "DeepSeek", "Gemini", "AI SDK"],
+  },
+  {
+    title: "网络 & 系统",
+    icon: Network,
+    content:
+      "深入理解网络协议、DNS、防火墙配置。熟练管理 Linux 和 macOS 系统。善于使用各类监控与测试工具（Speedtest, Uptime Kuma）保障系统稳定运行。",
+    tags: ["Linux", "macOS", "DNS", "Networking", "Monitoring"],
+  },
+  {
+    title: "DevOps & 其他",
+    icon: Settings2,
+    content:
+      "关注开发全流程，从域名注册、SSL 证书管理到 Git 版本控制和 CI/CD 自动化部署，致力于构建高效、规范的开发运维体系。",
+    tags: ["Git", "CI/CD", "SSL", "DevOps"],
+  },
+];
 ---
 
 <BaseLayout
@@ -12,18 +66,85 @@ const permalink = `${Astro.site?.href ?? ""}about`;
   permalink={permalink}
   current="/about"
 >
-  <div class="container">
-    <h1>{title}</h1>
-    <figure
-      class="float-none lg:float-right m-[0_auto_2em] lg:m-[-3em_-7em_2em_2em] max-w-40 xs:max-w-75"
+  <div class="max-w-5xl mx-auto px-4 md:px-8 py-8">
+    <!-- Hero Section -->
+    <section
+      class="flex flex-col-reverse md:flex-row items-center gap-8 md:gap-16 mb-16 animate-in fade-in slide-in-from-bottom-4 duration-700"
     >
-      <img
-        class="rounded-xl mb-[1.5em]"
-        src="/assets/about-illustration.webp"
-        alt="Illustration of a notebook"
-        width="330"
-      />
-    </figure>
-    <p>这是我的个人介绍～</p>
+      <div class="flex-1 text-center md:text-left">
+        <h1
+          class="font-bold tracking-tight text-gray-900 dark:text-white mb-4 text-4xl! md:text-5xl! leading-tight!"
+        >
+          我是 <span class="text-primary">硬核马哥</span>
+        </h1>
+        <p
+          class="text-xl text-gray-600 dark:text-gray-300 font-medium mb-6 mt-2! leading-normal!"
+        >
+          一位涉猎广泛的技术探索者
+        </p>
+        <div class="prose dark:prose-invert max-w-none">
+          <p
+            class="text-gray-600 dark:text-gray-400 text-base! md:text-lg! leading-relaxed mb-4! mt-0!"
+          >
+            我对技术充满热情，从前端交互到后端架构，从云端服务到本地
+            Homelab，从未停止探索的脚步。我渴望不断学习新知，用技术解决实际问题。
+          </p>
+        </div>
+      </div>
+      <div class="relative shrink-0 group">
+        <div
+          class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-primary/30 rounded-full blur-[50px] -z-10 opacity-60 group-hover:opacity-100 transition-opacity duration-500"
+        >
+        </div>
+        <img
+          src="/assets/about-illustration.webp"
+          alt="Hardcore Ma Illustration"
+          class="relative w-full max-w-[240px] md:max-w-[320px] h-auto transform transition duration-500 hover:scale-105 hover:-rotate-2 drop-shadow-xl"
+        />
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="flex items-center gap-4 mb-12 opacity-50">
+      <div class="h-px bg-gray-300 dark:bg-gray-700 flex-1"></div>
+      <Terminal className="w-5 h-5 text-gray-400" />
+      <div class="h-px bg-gray-300 dark:bg-gray-700 flex-1"></div>
+    </div>
+
+    <!-- Skills Grid -->
+    <section>
+      <h2
+        class="text-2xl md:text-3xl font-bold mb-10 text-center md:text-left flex items-center justify-center md:justify-start gap-3 mt-0!"
+      >
+        <span>技术栈与兴趣领域</span>
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {
+          skills.map((skill) => (
+            <div class="group p-6 bg-card dark:bg-accent rounded-xl border border-border dark:border-white/5 hover:border-primary dark:hover:border-primary transition-all duration-300 hover:shadow-lg hover:-translate-y-1 flex flex-col">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="p-2.5 bg-blue-50 dark:bg-primary/10 rounded-lg text-primary group-hover:scale-110 transition-transform duration-300">
+                  <skill.icon className="w-6 h-6" />
+                </div>
+                <h3 class="text-lg! font-bold! m-0! text-gray-900 dark:text-white group-hover:text-primary transition-colors">
+                  {skill.title}
+                </h3>
+              </div>
+              <p class="text-sm! md:text-base! text-gray-600 dark:text-gray-400 leading-relaxed mb-6 flex-1 mt-0!">
+                {skill.content}
+              </p>
+              <div class="flex flex-wrap gap-2 mt-auto">
+                {skill.tags.map((tag) => (
+                  <span class="px-2.5 py-1 text-xs font-medium bg-gray-100 dark:bg-background/50 text-gray-600 dark:text-muted-foreground rounded-md border border-transparent group-hover:border-gray-200 dark:group-hover:border-white/10 transition-colors">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
   </div>
 </BaseLayout>
