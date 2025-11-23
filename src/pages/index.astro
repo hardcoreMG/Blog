@@ -86,10 +86,10 @@ const permalink = Astro.site?.href ?? "";
         </div>
 
         <!-- Floating Badges -->
-        <FloatingBadge position="top-right">
+        <FloatingBadge position="top-right" delay={500}>
           <Code className="w-6 h-6 text-primary" />
         </FloatingBadge>
-        <FloatingBadge position="bottom-left">
+        <FloatingBadge position="bottom-left" delay={1500}>
           <Terminal className="w-6 h-6 text-cyan-600" />
         </FloatingBadge>
       </div>
