@@ -1,6 +1,6 @@
 import { NavbarButton } from "@/components/navbar/NavbarButton";
 import { useDarkMode } from "@/hooks/useDarkMode";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 const icons = [
   <svg
@@ -35,8 +35,20 @@ export default function ThemeToggleButton() {
     localStorageKey: "dark-mode",
   });
 
+  const isMounted = useRef(false);
+
   useEffect(() => {
     const root = document.documentElement;
+    // 首次挂载时，如果 React 状态与 DOM 不一致（即 React 为 Light 但 DOM 为 Dark），
+    // 则同步 React 状态，并阻止移除 DOM 上的 dark 类，从而避免 FOUC。
+    if (!isMounted.current) {
+      isMounted.current = true;
+      if (!isDarkMode && root.classList.contains("dark")) {
+        toggle();
+        return;
+      }
+    }
+
     if (isDarkMode) {
       root.classList.add("dark");
     } else {
@@ -49,10 +61,11 @@ export default function ThemeToggleButton() {
       variant="primary"
       className="rounded-full"
       onClick={toggle}
-      title={`切换到${isDarkMode ? "暗色" : "亮色"}主题`}
-      aria-label={`切换到${isDarkMode ? "暗色" : "亮色"}主题`}
+      title="切换主题"
+      aria-label="切换主题"
     >
-      {isDarkMode ? icons[1] : icons[0]}
+      <div className="block dark:hidden">{icons[0]}</div>
+      <div className="hidden dark:block">{icons[1]}</div>
     </NavbarButton>
   );
 }
