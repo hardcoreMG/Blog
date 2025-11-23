@@ -157,7 +157,6 @@
   }
 
   h2 {
-    margin: 1.6em 0 0 0;
     font-size: 1.8em;
   }
 
@@ -205,7 +204,7 @@
   }
 
   a {
-    @apply text-foreground underline underline-offset-4 transition-colors duration-150 hover:text-primary;
+    @apply text-foreground transition-colors duration-150 hover:text-primary;
   }
 
   p a {
@@ -345,5 +344,11 @@
     display: inline-block;
     animation: wave 2.5s ease-in-out infinite;
     transform-origin: 70% 70%;
+  }
+
+  .underline {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.25rem;
   }
 }
