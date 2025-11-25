@@ -116,8 +116,8 @@
 }
 
 @layer base {
-  /* 处理滚动条 */
   html {
+    /* 处理滚动条 */
     @apply overflow-y-scroll;
   }
 
@@ -133,7 +133,6 @@
   *:after {
     @apply box-border;
     @apply border-border outline-ring/50;
-    @apply transition-colors duration-150;
   }
 
   body {
@@ -204,7 +203,7 @@
   }
 
   a {
-    @apply text-foreground transition-colors duration-150 hover:text-primary;
+    @apply text-foreground hover:text-primary;
   }
 
   p a {
@@ -350,5 +349,31 @@
     text-decoration: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 0.25rem;
+  }
+
+  /* View Transitions API - 主题切换过渡效果 */
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.3s;
+    animation-timing-function: ease-in-out;
+  }
+
+  /* 降级方案：不支持 View Transitions API 的浏览器使用传统 CSS transition */
+  .theme-transitioning,
+  .theme-transitioning * {
+    @apply transition-colors duration-300;
+  }
+
+  /* 尊重用户的动画偏好设置 */
+  @media (prefers-reduced-motion: reduce) {
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+      animation-duration: 0.01ms;
+    }
+
+    .theme-transitioning,
+    .theme-transitioning * {
+      transition-duration: 0.01ms;
+    }
   }
 }

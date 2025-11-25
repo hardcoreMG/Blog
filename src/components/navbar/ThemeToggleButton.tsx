@@ -37,6 +37,37 @@ export default function ThemeToggleButton() {
 
   const isMounted = useRef(false);
 
+  // 使用 View Transitions API 实现平滑的主题切换
+  const toggleTheme = () => {
+    // 检查浏览器是否支持 View Transitions API
+    if (!document.startViewTransition) {
+      // 降级处理：使用传统的 CSS transition 方式
+      toggleThemeWithFallback();
+      return;
+    }
+
+    // 使用 View Transitions API 实现平滑过渡
+    document.startViewTransition(() => {
+      toggle();
+    });
+  };
+
+  // 降级方案：为不支持 View Transitions API 的浏览器提供 CSS transition
+  const toggleThemeWithFallback = () => {
+    const time = 500;
+    const root = document.documentElement;
+
+    // 添加过渡类，启用颜色过渡动画
+    root.classList.add("theme-transitioning");
+
+    toggle();
+
+    // 动画结束后移除过渡类，避免影响后续交互性能
+    setTimeout(() => {
+      root.classList.remove("theme-transitioning");
+    }, time);
+  };
+
   useEffect(() => {
     const root = document.documentElement;
     // 首次挂载时，如果 React 状态与 DOM 不一致（即 React 为 Light 但 DOM 为 Dark），
@@ -60,7 +91,7 @@ export default function ThemeToggleButton() {
     <NavbarButton
       variant="primary"
       className="rounded-full"
-      onClick={toggle}
+      onClick={toggleTheme}
       title="切换主题"
       aria-label="切换主题"
     >
