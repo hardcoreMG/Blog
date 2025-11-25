@@ -119,6 +119,8 @@
   html {
     /* 处理滚动条 */
     @apply overflow-y-scroll;
+    scroll-padding-top: 88px;
+    scroll-behavior: smooth;
   }
 
   @supports (scrollbar-gutter: stable) {
